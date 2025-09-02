@@ -1,0 +1,33 @@
+.table-image {
+  width: 100px;
+  height: auto;
+  object-fit: cover;
+}
+
+.center-table-container {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  max-width: 1500px;
+}
+
+.action {
+  display: flex;
+  justify-content: space-around;
+}
+.table-scroll-container {
+  max-height: 700px; /* adjust height as needed */
+  overflow-y: auto;
+  display: block;
+}
+
+
+.table-scroll-container thead.sticky-top th {
+  position: sticky;
+  top: 0;
+  background: #2273c3; /* match table-dark */
+  color: #fff;
+  z-index: 2;
+}

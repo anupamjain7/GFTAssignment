@@ -1,0 +1,73 @@
+<div class="onboarding">
+  <div class="left">
+    <div class="left-wrapper">
+      <h1 class="brand-title">NextGen Platform</h1>
+      <p class="brand-tagline">Your gateway to a better experience 🚀</p>
+    </div>
+  </div>
+
+  <div class="right">
+    <div class="right-wrapper">
+      <form [formGroup]="logInForm" autocomplete="off" class="login-form">
+        <h2 class="onboarding-title">Welcome Back 👋</h2>
+        <p class="onboarding-subtitle">Please sign in to continue</p>
+
+        <!-- Username -->
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="username"
+            placeholder="Enter your username"
+          />
+          <span
+            *ngIf="
+              logInForm.get('username')?.errors?.['required'] &&
+              logInForm.get('username')?.touched
+            "
+            class="err-msg"
+          >
+            Please enter username
+          </span>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group password-wrapper">
+          <input
+            [type]="passwordShow ? 'text' : 'password'"
+            class="form-control"
+            formControlName="password"
+            minlength="8"
+            maxlength="18"
+            placeholder="Enter your password"
+          />
+         
+          <span
+            class="err-msg"
+            *ngIf="
+              logInForm.controls['password'].hasError('required') &&
+              logInForm.get('password')?.touched
+            "
+          >
+            Please enter password
+          </span>
+        </div>
+
+        <div class="btn-group">
+          <button
+            type="submit"
+            [disabled]="!logInForm.valid"
+            (click)="login()"
+            class="btn btn-primary w-100"
+          >
+            Sign in
+          </button>
+        </div>
+
+        <p class="welcome-text">
+          Welcome to NextGen platform! Sign in for a better user experience ✨
+        </p>
+      </form>
+    </div>
+  </div>
+</div>

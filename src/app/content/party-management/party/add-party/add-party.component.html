@@ -1,0 +1,185 @@
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Add Party Details</h2>
+    <button type="button" class="btn btn-primary" routerLink="/party">
+      <i class="fas fa-list me-1"></i>Party Data
+    </button>
+  </div>
+
+  <form [formGroup]="createForm" (ngSubmit)="onSubmit()">
+    <!-- Basic Details Card -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-primary text-white">
+        <h5 class="mb-0">Basic Details</h5>
+      </div>
+      <div class="card-body">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label for="name" class="form-label">Name:*</label>
+            <input id="name" type="text" formControlName="name" class="form-control">
+            <div class="text-danger small mt-1" *ngIf="createForm.get('name')?.errors?.['required'] && createForm.get('name')?.touched">
+              Please enter name
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="company_name" class="form-label">Company Name:*</label>
+            <input id="company_name" type="text" formControlName="company_name" class="form-control">
+            <div class="text-danger small mt-1" *ngIf="createForm.get('company_name')?.errors?.['required'] && createForm.get('company_name')?.touched">
+              Please enter company name
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="mobile_no" class="form-label">Mobile Number:*</label>
+            <input id="mobile_no" type="text" formControlName="mobile_no" class="form-control">
+            <div class="text-danger small mt-1" *ngIf="createForm.get('mobile_no')?.errors?.['required'] && createForm.get('mobile_no')?.touched">
+              Please enter mobile number
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="telephone_no" class="form-label">Telephone Number:</label>
+            <input id="telephone_no" type="text" formControlName="telephone_no" class="form-control">
+          </div>
+          <div class="col-md-6">
+            <label for="whatsapp_no" class="form-label">Whatsapp Number:</label>
+            <input id="whatsapp_no" type="text" formControlName="whatsapp_no" class="form-control">
+          </div>
+          <div class="col-md-6">
+            <label for="email" class="form-label">Email:*</label>
+            <input id="email" type="email" formControlName="email" class="form-control">
+            <div class="text-danger small mt-1" *ngIf="createForm.get('email')?.errors?.['required'] && createForm.get('email')?.touched">
+              Please enter email
+            </div>
+          </div>
+          <div class="col-md-12">
+            <label for="remark" class="form-label">Remark:</label>
+            <textarea id="remark" formControlName="remark" class="form-control" rows="2"></textarea>
+          </div>
+          <div class="col-md-6 form-check mt-2">
+            <input type="checkbox" class="form-check-input" formControlName="login_access" id="loginAccess">
+            <label class="form-check-label" for="loginAccess">Login Access</label>
+          </div>
+          <div class="col-md-6 form-check mt-2">
+            <input type="checkbox" class="form-check-input" formControlName="apply_tds" id="applyTds">
+            <label class="form-check-label" for="applyTds">Apply TDS</label>
+          </div>
+          <div class="col-md-6" id="session-date">
+            <label for="date_of_birth" class="form-label">Date of Birth:</label>
+            <input id="date_of_birth" type="date" formControlName="date_of_birth" class="form-control">
+          </div>
+          <div class="col-md-6" id="session-date">
+            <label for="anniversary_date" class="form-label">Anniversary Date:</label>
+            <input id="anniversary_date" type="date" formControlName="anniversary_date" class="form-control">
+          </div>
+          <div class="col-md-6">
+            <label for="gstin" class="form-label">GSTIN:*</label>
+            <input id="gstin" type="text" formControlName="gstin" class="form-control">
+          </div>
+          <div class="col-md-6">
+            <label for="pan_no" class="form-label">PAN Number:</label>
+            <input id="pan_no" type="text" formControlName="pan_no" class="form-control">
+          </div>
+          <div class="col-md-6">
+            <label for="credit_limit" class="form-label">Credit Limit:*</label>
+            <input id="credit_limit" type="number" formControlName="credit_limit" class="form-control">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Addresses Card -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-info text-white">
+        <h5 class="mb-0">Addresses</h5>
+      </div>
+      <div class="card-body">
+        <div formArrayName="address">
+          <div *ngFor="let addressIndex of address.controls; let i=index" [formGroupName]="i" class="border rounded p-3 mb-3">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Address Line 1:</label>
+                <input type="text" formControlName="address_line_1" class="form-control">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Address Line 2:</label>
+                <input type="text" formControlName="address_line_2" class="form-control">
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">Country:</label>
+                <input type="text" formControlName="country" class="form-control">
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">State:</label>
+                <input type="text" formControlName="state" class="form-control">
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">City:</label>
+                <input type="text" formControlName="city" class="form-control">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Pincode:</label>
+                <input type="text" formControlName="pincode" class="form-control">
+              </div>
+            </div>
+            <div class="mt-2">
+              <button type="button" class="btn btn-danger btn-sm" (click)="removeAddress(i)">
+                <i class="fas fa-trash-alt me-1"></i>Remove Address
+              </button>
+            </div>
+          </div>
+          <button type="button" class="btn btn-primary btn-sm" (click)="addAddress()">
+            <i class="fas fa-plus me-1"></i>Add Address
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Banks Card -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <h5 class="mb-0">Banks</h5>
+      </div>
+      <div class="card-body">
+        <div formArrayName="bank_id">
+          <div *ngFor="let bankIndex of bank.controls; let i=index" [formGroupName]="i" class="border rounded p-3 mb-3">
+            <div class="row g-3">
+              <div class="col-md-4">
+                <label class="form-label">Bank IFSC Code:</label>
+                <input type="text" formControlName="bank_ifsc_code" class="form-control">
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">Bank Name:</label>
+                <input type="text" formControlName="bank_name" class="form-control">
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">Branch Name:</label>
+                <input type="text" formControlName="branch_name" class="form-control">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Account Number:</label>
+                <input type="text" formControlName="account_no" class="form-control">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Account Holder Name:</label>
+                <input type="text" formControlName="account_holder_name" class="form-control">
+              </div>
+            </div>
+            <div class="mt-2">
+              <button type="button" class="btn btn-danger btn-sm" (click)="removeBank(i)">
+                <i class="fas fa-trash-alt me-1"></i>Remove Bank
+              </button>
+            </div>
+          </div>
+          <button type="button" class="btn btn-primary btn-sm" (click)="addBank()">
+            <i class="fas fa-plus me-1"></i>Add Bank
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-center mb-5">
+      <button type="submit" class="btn btn-success btn-lg">
+        <i class="fas fa-check me-1"></i>{{ role == 2 ? "Update" : "Submit" }}
+      </button>
+    </div>
+  </form>
+</div>

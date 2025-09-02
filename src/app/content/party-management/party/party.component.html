@@ -1,0 +1,101 @@
+<div class="container mt-2">
+  <div class="row">
+    <div class="col-12 center-table-container">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h2>Party Data</h2>
+        <button type="button" class="btn btn-primary" routerLink="/add-party">
+          <i class="fas fa-plus me-1"></i>Add Party
+        </button>
+      </div>
+
+      <!-- Scrollable table container -->
+      <div class="table-responsive table-scroll-container">
+        <table class="table table-bordered table-striped table-hover m-0">
+          <thead class="table-primary sticky-top">
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Company Name</th>
+              <th>Mobile Number</th>
+              <th>Telephone Number</th>
+              <th>Whatsapp Number</th>
+              <th>Email</th>
+              <th>Remark</th>
+              <th>Login Access</th>
+              <th>Date of Birth</th>
+              <th>Anniversary Date</th>
+              <th>Gstin</th>
+              <th>Pan number</th>
+              <th>Apply TDS</th>
+              <th>Credit Limit</th>
+              <th>Address</th>
+              <th>Bank</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of data; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ user.name || 'NA' }}</td>
+              <td>{{ user.company_name || 'NA' }}</td>
+              <td>{{ user.mobile_no || 'NA' }}</td>
+              <td>{{ user.telephone_no || 'NA' }}</td>
+              <td>{{ user.whatsapp_no || 'NA' }}</td>
+              <td>{{ user.email || 'NA' }}</td>
+              <td>{{ user.remark || 'NA' }}</td>
+              <td>{{ user.login_access || 'NA' }}</td>
+              <td>{{ user.date_of_birth || 'NA' }}</td>
+              <td>{{ user.anniversary_date || 'NA' }}</td>
+              <td>{{ user.gstin || 'NA' }}</td>
+              <td>{{ user.pan_no || 'NA' }}</td>
+              <td>{{ user.apply_tds || 'NA' }}</td>
+              <td>{{ user.credit_limit || 'NA' }}</td>
+
+              <!-- Address -->
+              <td>
+                <div *ngIf="checkArray(user.address); else addressBlock">NA</div>
+                <ng-template #addressBlock>
+                  <ul class="mb-0">
+                    <li *ngFor="let address of user.address">
+                      {{ formatAddress(address) }}
+                    </li>
+                  </ul>
+                </ng-template>
+              </td>
+
+              <!-- Bank -->
+              <td>
+                <div *ngIf="checkArray(user.bank_id); else bankBlock">NA</div>
+                <ng-template #bankBlock>
+                  <ul class="mb-0">
+                    <li *ngFor="let bank of user.bank_id">
+                      {{ checkValue(bank.bank_name) }} {{ checkValue(bank.branch_name) }}
+                      {{ checkValue(bank.account_no) }} {{ checkValue(bank.bank_ifsc_code) }}
+                      {{ checkValue(bank.account_holder_name) }}
+                    </li>
+                  </ul>
+                </ng-template>
+              </td>
+
+              <!-- Actions -->
+              <td class="action">
+                <button class="btn btn-sm btn-outline-primary me-1" (click)="editItem(user.id)">
+                  <i class="fas fa-edit"></i>
+                </button>
+                <button class="btn btn-sm btn-outline-danger" (click)="deleteItem(user.id)">
+                  <i class="fas fa-trash-alt"></i>
+                </button>
+              </td>
+            </tr>
+
+            <tr *ngIf="noData">
+              <td class="text-center" [attr.colspan]="18">
+                No Record available
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
